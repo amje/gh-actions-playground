@@ -1,0 +1,29 @@
+name: Prepare Release
+on:
+  workflow_dispatch:
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - run: npm i -g standard-version
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "<>"
+      - name: Create Git tag
+        run: standard-version
+      - name: Push Git tag
+        id: push_tag
+        run: git push --follow-tags origin main
+      - name: Generate release body
+        run: npx extract-changelog-release > RELEASE_BODY.md
+      - name: Create GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          bodyFile: RELEASE_BODY.md
