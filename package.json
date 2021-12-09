@@ -1,6 +1,6 @@
 {
   "name": "amje-gh-actions-playground",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Sandbox for gh actions",
   "main": "index.js",
   "scripts": {
