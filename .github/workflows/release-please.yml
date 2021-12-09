@@ -9,4 +9,3 @@ jobs:
       - uses: GoogleCloudPlatform/release-please-action@v2
         with:
           release-type: node
-          package-name: amje-gh-actions-playground
