@@ -1,7 +1,7 @@
 {
   "name": "amje-gh-actions-playground",
   "version": "1.1.1",
-  "description": "",
+  "description": "Sandbox for gh actions",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
