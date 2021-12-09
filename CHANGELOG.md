@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://www.github.com/amje/gh-actions-playground/compare/v1.2.0...v1.3.0) (2021-12-09)
+
+
+### Features
+
+* add line again ([084cf45](https://www.github.com/amje/gh-actions-playground/commit/084cf454fadf4e3c0dadc42d37df6d3ddab0308e))
+
+
+### Bug Fixes
+
+* remove package name ([9f74121](https://www.github.com/amje/gh-actions-playground/commit/9f741211d2157f4e3684a8c611f232f4cfbb17d5))
+
 ## [1.2.0](https://www.github.com/amje/gh-actions-playground/compare/v1.1.1...v1.2.0) (2021-12-09)
 
 
