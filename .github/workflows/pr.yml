@@ -1,0 +1,15 @@
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+jobs:
+  upload:
+    if: github.event.pull_request.state == 'open'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "upload"
+  delete:
+    if: github.event.pull_request.state == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "delete"
