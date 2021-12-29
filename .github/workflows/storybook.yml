@@ -38,4 +38,4 @@ jobs:
       run: aws s3 rm $S3_URI --endpoint-url=$S3_ENDPOINT_URL --recursive
     - name: Upload New Static
       if: ${{ github.event.pull_request.state == 'open' }}
-      run: aws s3 cp storybook-static $S3_URI --endpoint-url=S3_ENDPOINT_URL --recursive
+      run: aws s3 cp storybook-static $S3_URI --endpoint-url=$S3_ENDPOINT_URL --recursive
