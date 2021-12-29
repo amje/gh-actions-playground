@@ -1,0 +1,41 @@
+name: Storybook
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    env:
+      S3_ENDPOINT_URL: https://storage.yandexcloud.net
+      S3_URI: ${{ format('s3://storybook-static/uikit/pulls/{0}/', github.event.pull_request.number) }}
+    steps:
+    - name: Checkout
+      if: ${{ github.event.pull_request.state == 'open' }}
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Setup Node
+      if: ${{ github.event.pull_request.state == 'open' }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14.x'
+        cache: 'npm'
+    - name: Install Packages
+      if: ${{ github.event.pull_request.state == 'open' }}
+      run: npm ci
+    - name: Build Storybook
+      if: ${{ github.event.pull_request.state == 'open' }}
+      run: npm run storybook
+    - name: Setup Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.STORYBOOK_STORAGE_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.STORYBOOK_STORAGE_SECRET_KEY }}
+    - name: Delete Previous Static
+      run: aws s3 rm $S3_URI --endpoint-url=$S3_ENDPOINT_URL --recursive
+    - name: Upload New Static
+      if: ${{ github.event.pull_request.state == 'open' }}
+      run: aws s3 cp storybook-static $S3_URI --endpoint-url=S3_ENDPOINT_URL --recursive
