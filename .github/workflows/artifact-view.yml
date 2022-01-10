@@ -20,4 +20,6 @@ jobs:
     - name: Log 1
       run: ls
     - name: Log 2
+      run: cat folder/file.js
+    - name: Log 3
       run: cat sha/sha.txt
