@@ -1,0 +1,28 @@
+name: Build Artifact
+
+on:
+  push:
+  - branches: [main]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Create Folder Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: folder
+        path: ./artifact-folder
+        retention-days: 5
+    - name: Create File
+      run: echo ${{ github.event.head_commit.id }} > ./sha.txt
+    - name: Create SHA Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: sha
+        path: ./sha.txt
